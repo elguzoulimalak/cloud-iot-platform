@@ -1,0 +1,116 @@
+
+services:
+  # --- Device Management Service ---
+  device_mgmt:
+    build:
+      context: ./Device Management
+      dockerfile: Dockerfile
+    container_name: device-mgmt-ms
+    environment:
+      - SERVER_DB=device_db
+      - NAME_DB=db_device_management
+      - RABBITMQ_HOST=rabbitmq
+      - REDIS_HOST=redis
+      - JWT_SECRET=mysecretkey
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./Device Management/logs:/app/logs
+    networks:
+      - net-iot
+    depends_on:
+      - device_db
+      - rabbitmq
+      - redis
+
+  device_db:
+    image: postgres:alpine
+    container_name: device_postgresql
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=db_device_management
+    ports:
+      - "5433:5432"
+    networks:
+      - net-iot
+
+  # --- Monitoring Service ---
+  monitoring:
+    build:
+      context: ./Monitoring
+      dockerfile: Dockerfile
+    container_name: monitoring-ms
+    environment:
+      - MONGO_URI=mongodb://mongo:27017
+      - MONGO_DB_NAME=iot_monitoring
+      - RABBITMQ_HOST=rabbitmq
+    ports:
+      - "8002:8002"
+    networks:
+      - net-iot
+    depends_on:
+      - mongo
+      - rabbitmq
+
+  mongo:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    networks:
+      - net-iot
+
+  # --- Signing Service ---
+  signing:
+    build:
+      context: ./Signing
+      dockerfile: Dockerfile
+    container_name: signing-ms
+    environment:
+      - SERVER_DB=signing_db
+      - NAME_DB=db_signing
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=1234
+      - SECRET_KEY=mysecretkey
+      - JWT_ALGORITHM=HS256
+    ports:
+      - "8003:8003"
+    networks:
+      - net-iot
+    depends_on:
+      - signing_db
+
+  signing_db:
+    image: postgres:alpine
+    container_name: signing_postgresql
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=db_signing
+    ports:
+      - "5434:5432"
+    networks:
+      - net-iot
+
+  # --- Shared Infrastructure ---
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - net-iot
+
+  redis:
+    image: redis:alpine
+    container_name: redis_cache
+    ports:
+      - "6379:6379"
+    networks:
+      - net-iot
+
+networks:
+  net-iot:
+    driver: bridge
