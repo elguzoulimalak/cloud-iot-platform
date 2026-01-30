@@ -144,3 +144,4 @@ def delete(device_id: int, session: Session = Depends(session_factory), user_pay
     except Exception as e:
         logger.error(f"Error deleting device: {e}")
         raise HTTPException(status_code=500, detail="Internal Server Error")
+

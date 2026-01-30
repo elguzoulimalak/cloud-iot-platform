@@ -1,17 +1,19 @@
 import { useEffect, useState } from 'react';
 import { getDevices, deleteDevice } from '../services/api';
+import DeviceCard from './DeviceCard';
+import { ArrowsClockwise } from 'phosphor-react';
 
-export default function DeviceList({ onEdit }) {
+export default function DeviceList({ refreshTrigger }) { // Added prop to trigger refresh
     const [devices, setDevices] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
 
     const fetchDevices = async () => {
+        setLoading(true);
         try {
             const data = await getDevices();
             setDevices(data);
         } catch (err) {
-            setError('Failed to load devices');
+            console.error('Failed to load devices');
         } finally {
             setLoading(false);
         }
@@ -19,52 +21,42 @@ export default function DeviceList({ onEdit }) {
 
     useEffect(() => {
         fetchDevices();
-    }, []);
+    }, [refreshTrigger]); // Refresh when trigger changes
 
     const handleDelete = async (id) => {
-        if (!window.confirm('Are you sure?')) return;
+        if (!window.confirm('Delete this device?')) return;
         try {
             await deleteDevice(id);
             setDevices(devices.filter(d => d.id !== id));
         } catch (err) {
-            console.error(err);
-            alert(`Failed to delete device: ${err.response?.data?.detail || err.message}`);
+            alert('Failed to delete');
         }
     };
 
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>{error}</div>;
-
     return (
         <div>
-            <h2>Device List</h2>
-            <button onClick={fetchDevices}>Refresh</button>
-            <table border="1" cellPadding="5" style={{ width: '100%', marginTop: '10px' }}>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Type</th>
-                        <th>Status</th>
-                        <th>IP Address</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+                <h2 style={{ margin: 0 }}>Overview</h2>
+                <button onClick={fetchDevices} style={{ background: 'transparent', border: '1px solid var(--border-glass)', borderRadius: '8px', padding: '8px', color: 'var(--text-muted)' }}>
+                    <ArrowsClockwise size={20} />
+                </button>
+            </div>
+
+            {loading ? (
+                <div style={{ textAlign: 'center', color: 'var(--text-muted)', padding: '40px' }}>Loading devices...</div>
+            ) : (
+                <div className="grid-layout">
                     {devices.map(device => (
-                        <tr key={device.id}>
-                            <td>{device.id}</td>
-                            <td>{device.name}</td>
-                            <td>{device.type}</td>
-                            <td>{device.status}</td>
-                            <td>{device.ip_address}</td>
-                            <td>
-                                <button onClick={() => handleDelete(device.id)}>Delete</button>
-                            </td>
-                        </tr>
+                        <DeviceCard key={device.id} device={device} onDelete={handleDelete} />
                     ))}
-                </tbody>
-            </table>
+                </div>
+            )}
+
+            {!loading && devices.length === 0 && (
+                <div className="glass-panel" style={{ textAlign: 'center', padding: '40px', color: 'var(--text-muted)' }}>
+                    No devices found. Click "Add Device" to get started.
+                </div>
+            )}
         </div>
     );
 }

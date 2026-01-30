@@ -219,3 +219,381 @@
 2026-01-29 12:49:12,511-INFO-Device deleted: 18
 2026-01-29 12:49:12,512-INFO-Published message to device.deleted
 2026-01-29 12:49:12,519-INFO-Cache DELETED for pattern devices:all (1 keys)
+2026-01-29 22:05:13,374-INFO-Connected to Redis at redis:6379
+2026-01-29 22:05:13,377-INFO-Cache MISS for devices:all
+2026-01-29 22:05:13,386-INFO-Cache SET for devices:all (TTL: 60s)
+2026-01-29 22:05:13,393-INFO-Cache HIT for devices:all
+2026-01-29 22:05:13,395-INFO-Cache SET for devices:all (TTL: 60s)
+2026-01-29 22:05:24,163-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 200 OK"
+2026-01-29 22:05:24,189-INFO-Device created: ordinateur
+2026-01-29 22:05:24,192-INFO-Pika version 1.3.2 connecting to ('172.18.0.7', 5672)
+2026-01-29 22:05:24,193-INFO-Socket connected: <socket.socket fd=21, family=2, type=1, proto=6, laddr=('172.18.0.9', 58616), raddr=('172.18.0.7', 5672)>
+2026-01-29 22:05:24,194-INFO-Streaming transport linked up: (<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x7a5ca23ce7b0>, _StreamingProtocolShim: <SelectConnection PROTOCOL transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x7a5ca23ce7b0> params=<ConnectionParameters host=rabbitmq port=5672 virtual_host=/ ssl=False>>).
+2026-01-29 22:05:24,198-INFO-AMQPConnector - reporting success: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x7a5ca23ce7b0> params=<ConnectionParameters host=rabbitmq port=5672 virtual_host=/ ssl=False>>
+2026-01-29 22:05:24,199-INFO-AMQPConnectionWorkflow - reporting success: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x7a5ca23ce7b0> params=<ConnectionParameters host=rabbitmq port=5672 virtual_host=/ ssl=False>>
+2026-01-29 22:05:24,199-INFO-Connection workflow succeeded: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x7a5ca23ce7b0> params=<ConnectionParameters host=rabbitmq port=5672 virtual_host=/ ssl=False>>
+2026-01-29 22:05:24,200-INFO-Created channel=1
+2026-01-29 22:05:24,203-INFO-Connected to RabbitMQ
+2026-01-29 22:05:24,204-INFO-Published message to device.created
+2026-01-29 22:05:24,205-INFO-Cache DELETED for pattern devices:all (1 keys)
+2026-01-29 22:05:26,231-INFO-Cache MISS for devices:all
+2026-01-29 22:05:26,234-INFO-Cache SET for devices:all (TTL: 60s)
+2026-01-29 22:05:26,238-INFO-Cache HIT for devices:all
+2026-01-29 22:05:30,833-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 200 OK"
+2026-01-29 22:05:30,844-INFO-Device deleted: 1
+2026-01-29 22:05:30,846-INFO-Published message to device.deleted
+2026-01-29 22:05:30,847-INFO-Cache DELETED for pattern devices:all (1 keys)
+2026-01-29 22:05:38,292-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 200 OK"
+2026-01-29 22:05:38,299-INFO-Device created: ordinateur
+2026-01-29 22:05:38,300-INFO-Published message to device.created
+2026-01-29 22:05:40,027-INFO-Cache MISS for devices:all
+2026-01-29 22:05:40,030-INFO-Cache SET for devices:all (TTL: 60s)
+2026-01-29 22:05:40,035-INFO-Cache HIT for devices:all
+2026-01-29 22:14:23,438-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 200 OK"
+2026-01-29 22:14:23,441-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 200 OK"
+2026-01-29 22:14:23,808-INFO-Device created: SmartScreen_01
+2026-01-29 22:14:23,829-INFO-Device created: Laptop_User1
+2026-01-29 22:14:23,871-ERROR-_AsyncBaseTransport._produce() failed, aborting connection: error=AssertionError(('_AsyncTransportBase._produce() tx buffer size underflow', -111, 1)); sock=<socket.socket fd=21, family=2, type=1, proto=6, laddr=('172.18.0.9', 58616), raddr=('172.18.0.7', 5672)>; Caller's stack:
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/pika/adapters/utils/io_services_utils.py", line 1103, in _on_socket_writable
+    self._produce()
+  File "/usr/local/lib/python3.12/site-packages/pika/adapters/utils/io_services_utils.py", line 829, in _produce
+    assert self._tx_buffered_byte_count >= 0, (
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('_AsyncTransportBase._produce() tx buffer size underflow', -111, 1)
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/pika/adapters/utils/io_services_utils.py", line 1103, in _on_socket_writable
+    self._produce()
+  File "/usr/local/lib/python3.12/site-packages/pika/adapters/utils/io_services_utils.py", line 829, in _produce
+    assert self._tx_buffered_byte_count >= 0, (
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('_AsyncTransportBase._produce() tx buffer size underflow', -111, 1)
+2026-01-29 22:14:23,873-ERROR-_AsyncBaseTransport._produce() failed, aborting connection: error=AssertionError(('_AsyncTransportBase._produce() tx buffer size underflow', -1, 1)); sock=<socket.socket fd=21, family=2, type=1, proto=6, laddr=('172.18.0.9', 58616), raddr=('172.18.0.7', 5672)>; Caller's stack:
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/pika/adapters/utils/io_services_utils.py", line 1103, in _on_socket_writable
+    self._produce()
+  File "/usr/local/lib/python3.12/site-packages/pika/adapters/utils/io_services_utils.py", line 829, in _produce
+    assert self._tx_buffered_byte_count >= 0, (
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('_AsyncTransportBase._produce() tx buffer size underflow', -1, 1)
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/pika/adapters/utils/io_services_utils.py", line 1103, in _on_socket_writable
+    self._produce()
+  File "/usr/local/lib/python3.12/site-packages/pika/adapters/utils/io_services_utils.py", line 829, in _produce
+    assert self._tx_buffered_byte_count >= 0, (
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('_AsyncTransportBase._produce() tx buffer size underflow', -1, 1)
+2026-01-29 22:14:23,876-INFO-_AsyncTransportBase._initate_abort(): Initiating abrupt asynchronous transport shutdown: state=1; error=AssertionError(('_AsyncTransportBase._produce() tx buffer size underflow', -111, 1)); <socket.socket fd=21, family=2, type=1, proto=6, laddr=('172.18.0.9', 58616), raddr=('172.18.0.7', 5672)>
+2026-01-29 22:14:23,877-INFO-_AsyncTransportBase._initate_abort(): Initiating abrupt asynchronous transport shutdown: state=1; error=AssertionError(('_AsyncTransportBase._produce() tx buffer size underflow', -1, 1)); <socket.socket fd=21, family=2, type=1, proto=6, laddr=('172.18.0.9', 58616), raddr=('172.18.0.7', 5672)>
+2026-01-29 22:14:23,879-INFO-Deactivating transport: state=1; <socket.socket fd=21, family=2, type=1, proto=6, laddr=('172.18.0.9', 58616), raddr=('172.18.0.7', 5672)>
+2026-01-29 22:14:23,881-INFO-Deactivating transport: state=1; <socket.socket fd=21, family=2, type=1, proto=6, laddr=('172.18.0.9', 58616), raddr=('172.18.0.7', 5672)>
+2026-01-29 22:14:23,887-ERROR-connection_lost: StreamLostError: ("Stream connection lost: AssertionError(('_AsyncTransportBase._produce() tx buffer size underflow', -111, 1))",)
+2026-01-29 22:14:23,904-ERROR-Wrapped func exited with exception. Caller's stack:
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/pika/adapters/utils/io_services_utils.py", line 1103, in _on_socket_writable
+    self._produce()
+  File "/usr/local/lib/python3.12/site-packages/pika/adapters/utils/io_services_utils.py", line 829, in _produce
+    assert self._tx_buffered_byte_count >= 0, (
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('_AsyncTransportBase._produce() tx buffer size underflow', -1, 1)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/pika/diagnostic_utils.py", line 53, in log_exception_func_wrap
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/pika/adapters/utils/io_services_utils.py", line 935, in _initiate_abort
+    assert self._state == self._STATE_ABORTED_BY_USER, (
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('_AsyncTransportBase._initate_abort() expected _STATE_ABORTED_BY_USER', 2)
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/pika/adapters/utils/io_services_utils.py", line 1103, in _on_socket_writable
+    self._produce()
+  File "/usr/local/lib/python3.12/site-packages/pika/adapters/utils/io_services_utils.py", line 829, in _produce
+    assert self._tx_buffered_byte_count >= 0, (
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('_AsyncTransportBase._produce() tx buffer size underflow', -1, 1)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/pika/diagnostic_utils.py", line 53, in log_exception_func_wrap
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/pika/adapters/utils/io_services_utils.py", line 935, in _initiate_abort
+    assert self._state == self._STATE_ABORTED_BY_USER, (
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('_AsyncTransportBase._initate_abort() expected _STATE_ABORTED_BY_USER', 2)
+2026-01-29 22:14:23,907-INFO-AMQP stack terminated, failed to connect, or aborted: opened=True, error-arg=StreamLostError: ("Stream connection lost: AssertionError(('_AsyncTransportBase._produce() tx buffer size underflow', -111, 1))",); pending-error=None
+2026-01-29 22:14:23,908-ERROR-Wrapped func exited with exception. Caller's stack:
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/pika/adapters/utils/io_services_utils.py", line 1103, in _on_socket_writable
+    self._produce()
+  File "/usr/local/lib/python3.12/site-packages/pika/adapters/utils/io_services_utils.py", line 829, in _produce
+    assert self._tx_buffered_byte_count >= 0, (
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('_AsyncTransportBase._produce() tx buffer size underflow', -1, 1)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/pika/diagnostic_utils.py", line 53, in log_exception_func_wrap
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/pika/adapters/utils/io_services_utils.py", line 1114, in _on_socket_writable
+    self._initiate_abort(error)
+  File "/usr/local/lib/python3.12/site-packages/pika/diagnostic_utils.py", line 53, in log_exception_func_wrap
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/pika/adapters/utils/io_services_utils.py", line 935, in _initiate_abort
+    assert self._state == self._STATE_ABORTED_BY_USER, (
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('_AsyncTransportBase._initate_abort() expected _STATE_ABORTED_BY_USER', 2)
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/pika/adapters/utils/io_services_utils.py", line 1103, in _on_socket_writable
+    self._produce()
+  File "/usr/local/lib/python3.12/site-packages/pika/adapters/utils/io_services_utils.py", line 829, in _produce
+    assert self._tx_buffered_byte_count >= 0, (
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('_AsyncTransportBase._produce() tx buffer size underflow', -1, 1)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/pika/diagnostic_utils.py", line 53, in log_exception_func_wrap
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/pika/adapters/utils/io_services_utils.py", line 1114, in _on_socket_writable
+    self._initiate_abort(error)
+  File "/usr/local/lib/python3.12/site-packages/pika/diagnostic_utils.py", line 53, in log_exception_func_wrap
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/pika/adapters/utils/io_services_utils.py", line 935, in _initiate_abort
+    assert self._state == self._STATE_ABORTED_BY_USER, (
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('_AsyncTransportBase._initate_abort() expected _STATE_ABORTED_BY_USER', 2)
+2026-01-29 22:14:23,915-INFO-Stack terminated due to StreamLostError: ("Stream connection lost: AssertionError(('_AsyncTransportBase._produce() tx buffer size underflow', -111, 1))",)
+2026-01-29 22:14:23,918-ERROR-Failed to publish message: ('_AsyncTransportBase._initate_abort() expected _STATE_ABORTED_BY_USER', 2)
+2026-01-29 22:14:23,920-INFO-Closing transport socket and unlinking: state=2; <socket.socket fd=21, family=2, type=1, proto=6, laddr=('172.18.0.9', 58616), raddr=('172.18.0.7', 5672)>
+2026-01-29 22:14:23,921-ERROR-Error creating device: ('_AsyncTransportBase._initate_abort() expected _STATE_ABORTED_BY_USER', 2)
+2026-01-29 22:14:23,924-ERROR-Unexpected connection close detected: StreamLostError: ("Stream connection lost: AssertionError(('_AsyncTransportBase._produce() tx buffer size underflow', -111, 1))",)
+2026-01-29 22:14:23,928-ERROR-Failed to publish message: Stream connection lost: AssertionError(('_AsyncTransportBase._produce() tx buffer size underflow', -111, 1))
+2026-01-29 22:14:23,929-ERROR-Error creating device: Stream connection lost: AssertionError(('_AsyncTransportBase._produce() tx buffer size underflow', -111, 1))
+2026-01-29 22:14:28,979-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 200 OK"
+2026-01-29 22:14:28,979-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 200 OK"
+2026-01-29 22:14:34,066-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 200 OK"
+2026-01-29 22:14:36,060-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 200 OK"
+2026-01-29 22:14:39,150-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 200 OK"
+2026-01-29 22:14:41,123-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 200 OK"
+2026-01-29 22:15:45,714-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 200 OK"
+2026-01-29 22:15:45,714-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 200 OK"
+2026-01-29 22:15:45,772-INFO-Cache MISS for devices:all
+2026-01-29 22:15:45,789-INFO-Cache SET for devices:all (TTL: 60s)
+2026-01-29 22:15:45,789-INFO-Cache HIT for devices:all
+2026-01-29 22:15:52,804-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 200 OK"
+2026-01-29 22:15:52,860-INFO-Device updated: SmartScreen_01
+2026-01-29 22:15:52,871-INFO-Pika version 1.3.2 connecting to ('172.18.0.7', 5672)
+2026-01-29 22:15:52,873-INFO-Socket connected: <socket.socket fd=21, family=2, type=1, proto=6, laddr=('172.18.0.9', 45390), raddr=('172.18.0.7', 5672)>
+2026-01-29 22:15:52,877-INFO-Streaming transport linked up: (<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x7a5ca02c9b20>, _StreamingProtocolShim: <SelectConnection PROTOCOL transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x7a5ca02c9b20> params=<ConnectionParameters host=rabbitmq port=5672 virtual_host=/ ssl=False>>).
+2026-01-29 22:15:52,885-INFO-AMQPConnector - reporting success: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x7a5ca02c9b20> params=<ConnectionParameters host=rabbitmq port=5672 virtual_host=/ ssl=False>>
+2026-01-29 22:15:52,886-INFO-AMQPConnectionWorkflow - reporting success: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x7a5ca02c9b20> params=<ConnectionParameters host=rabbitmq port=5672 virtual_host=/ ssl=False>>
+2026-01-29 22:15:52,887-INFO-Connection workflow succeeded: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x7a5ca02c9b20> params=<ConnectionParameters host=rabbitmq port=5672 virtual_host=/ ssl=False>>
+2026-01-29 22:15:52,890-INFO-Created channel=1
+2026-01-29 22:15:52,894-INFO-Connected to RabbitMQ
+2026-01-29 22:15:52,895-INFO-Published message to device.updated
+2026-01-29 22:15:54,796-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 200 OK"
+2026-01-29 22:15:54,804-INFO-Device updated: Laptop_User1
+2026-01-29 22:15:54,805-INFO-Published message to device.updated
+2026-01-29 22:17:17,004-INFO-Cache MISS for devices:all
+2026-01-29 22:17:17,011-INFO-Cache SET for devices:all (TTL: 60s)
+2026-01-29 22:17:17,017-INFO-Cache HIT for devices:all
+2026-01-29 22:17:23,560-INFO-Cache HIT for devices:all
+2026-01-29 22:20:51,739-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 200 OK"
+2026-01-29 22:20:51,740-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 200 OK"
+2026-01-29 22:20:51,740-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 200 OK"
+2026-01-29 22:20:51,764-INFO-Device created: Paris_Weather_Station
+2026-01-29 22:20:51,772-INFO-Pika version 1.3.2 connecting to ('172.18.0.7', 5672)
+2026-01-29 22:20:51,773-INFO-Socket connected: <socket.socket fd=23, family=2, type=1, proto=6, laddr=('172.18.0.9', 45898), raddr=('172.18.0.7', 5672)>
+2026-01-29 22:20:51,775-INFO-Streaming transport linked up: (<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x7bf710f90f80>, _StreamingProtocolShim: <SelectConnection PROTOCOL transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x7bf710f90f80> params=<ConnectionParameters host=rabbitmq port=5672 virtual_host=/ ssl=False>>).
+2026-01-29 22:20:51,783-INFO-AMQPConnector - reporting success: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x7bf710f90f80> params=<ConnectionParameters host=rabbitmq port=5672 virtual_host=/ ssl=False>>
+2026-01-29 22:20:51,784-INFO-AMQPConnectionWorkflow - reporting success: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x7bf710f90f80> params=<ConnectionParameters host=rabbitmq port=5672 virtual_host=/ ssl=False>>
+2026-01-29 22:20:51,784-INFO-Connection workflow succeeded: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x7bf710f90f80> params=<ConnectionParameters host=rabbitmq port=5672 virtual_host=/ ssl=False>>
+2026-01-29 22:20:51,788-INFO-Created channel=1
+2026-01-29 22:20:51,791-INFO-Connected to RabbitMQ
+2026-01-29 22:20:51,791-INFO-Published message to device.created
+2026-01-29 22:20:51,795-INFO-Cache MISS for devices:all
+2026-01-29 22:20:51,795-INFO-Connected to Redis at redis:6379
+2026-01-29 22:20:51,797-INFO-Cache MISS for devices:all
+2026-01-29 22:20:51,802-INFO-Cache SET for devices:all (TTL: 60s)
+2026-01-29 22:20:51,802-INFO-Cache SET for devices:all (TTL: 60s)
+2026-01-29 22:20:59,829-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 200 OK"
+2026-01-29 22:20:59,839-INFO-Device updated: SmartScreen_01
+2026-01-29 22:20:59,839-INFO-Published message to device.updated
+2026-01-29 22:20:59,842-INFO-Cache DELETED for pattern devices:all (1 keys)
+2026-01-29 22:21:00,835-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 200 OK"
+2026-01-29 22:21:00,844-INFO-Device updated: Laptop_User1
+2026-01-29 22:21:00,845-INFO-Published message to device.updated
+2026-01-29 22:21:06,867-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 200 OK"
+2026-01-29 22:21:06,872-INFO-Device updated: SmartScreen_01
+2026-01-29 22:21:06,873-INFO-Published message to device.updated
+2026-01-29 22:21:08,871-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 200 OK"
+2026-01-29 22:21:08,876-INFO-Device updated: Laptop_User1
+2026-01-29 22:21:08,877-INFO-Published message to device.updated
+2026-01-29 22:21:13,900-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 200 OK"
+2026-01-29 22:21:13,908-INFO-Device updated: SmartScreen_01
+2026-01-29 22:21:13,909-INFO-Published message to device.updated
+2026-01-29 22:21:13,915-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 200 OK"
+2026-01-29 22:21:13,921-INFO-Device updated: Laptop_User1
+2026-01-29 22:21:13,921-INFO-Published message to device.updated
+2026-01-29 22:23:51,206-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 200 OK"
+2026-01-29 22:23:51,207-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 200 OK"
+2026-01-29 22:23:51,207-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 200 OK"
+2026-01-29 22:23:51,247-INFO-Connected to Redis at redis:6379
+2026-01-29 22:23:51,249-INFO-Cache MISS for devices:all
+2026-01-29 22:23:51,252-INFO-Cache MISS for devices:all
+2026-01-29 22:23:51,259-INFO-Cache SET for devices:all (TTL: 60s)
+2026-01-29 22:23:51,261-INFO-Cache SET for devices:all (TTL: 60s)
+2026-01-29 22:23:51,269-INFO-Cache HIT for devices:all
+2026-01-29 22:23:51,586-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 200 OK"
+2026-01-29 22:23:51,597-INFO-Pika version 1.3.2 connecting to ('172.18.0.7', 5672)
+2026-01-29 22:23:51,597-INFO-Socket connected: <socket.socket fd=22, family=2, type=1, proto=6, laddr=('172.18.0.9', 46802), raddr=('172.18.0.7', 5672)>
+2026-01-29 22:23:51,600-INFO-Streaming transport linked up: (<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x70584ce99550>, _StreamingProtocolShim: <SelectConnection PROTOCOL transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x70584ce99550> params=<ConnectionParameters host=rabbitmq port=5672 virtual_host=/ ssl=False>>).
+2026-01-29 22:23:51,605-INFO-AMQPConnector - reporting success: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x70584ce99550> params=<ConnectionParameters host=rabbitmq port=5672 virtual_host=/ ssl=False>>
+2026-01-29 22:23:51,606-INFO-AMQPConnectionWorkflow - reporting success: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x70584ce99550> params=<ConnectionParameters host=rabbitmq port=5672 virtual_host=/ ssl=False>>
+2026-01-29 22:23:51,606-INFO-Connection workflow succeeded: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x70584ce99550> params=<ConnectionParameters host=rabbitmq port=5672 virtual_host=/ ssl=False>>
+2026-01-29 22:23:51,607-INFO-Created channel=1
+2026-01-29 22:23:51,610-INFO-Connected to RabbitMQ
+2026-01-29 22:23:51,611-INFO-Published message to device.telemetry
+2026-01-29 22:23:51,612-INFO-Telemetry received from Paris_Weather_Station: {'id': 5, 'name': 'Paris_Weather_Station', 'type': 'WeatherStation', 'status': 'active', 'value': 3.9, 'timestamp': '2026-01-29T23:27:47.098468'}
+2026-01-29 22:23:57,284-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 200 OK"
+2026-01-29 22:23:57,293-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 200 OK"
+2026-01-29 22:23:57,299-INFO-Device updated: Laptop_User1
+2026-01-29 22:23:57,300-INFO-Published message to device.updated
+2026-01-29 22:23:57,303-INFO-Cache DELETED for pattern devices:all (1 keys)
+2026-01-29 22:23:57,305-INFO-Device updated: SmartScreen_01
+2026-01-29 22:23:57,306-INFO-Published message to device.updated
+2026-01-29 22:24:06,327-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 200 OK"
+2026-01-29 22:24:06,333-INFO-Device updated: Laptop_User1
+2026-01-29 22:24:06,334-INFO-Published message to device.updated
+2026-01-29 22:24:07,336-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 200 OK"
+2026-01-29 22:24:07,342-INFO-Device updated: SmartScreen_01
+2026-01-29 22:24:07,343-INFO-Published message to device.updated
+2026-01-29 22:24:14,362-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 200 OK"
+2026-01-29 22:24:14,368-INFO-Device updated: Laptop_User1
+2026-01-29 22:24:14,369-INFO-Published message to device.updated
+2026-01-29 22:24:16,365-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 200 OK"
+2026-01-29 22:24:16,371-INFO-Device updated: SmartScreen_01
+2026-01-29 22:24:16,372-INFO-Published message to device.updated
+2026-01-29 22:24:20,396-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 200 OK"
+2026-01-29 22:24:20,402-INFO-Device updated: Laptop_User1
+2026-01-29 22:24:20,403-INFO-Published message to device.updated
+2026-01-29 23:28:17,447-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 404 Not Found"
+2026-01-29 23:28:17,448-ERROR-Error verifying token: 401: Invalid token
+2026-01-29 22:24:25,396-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 200 OK"
+2026-01-29 22:24:25,414-INFO-Device updated: SmartScreen_01
+2026-01-29 22:24:25,416-INFO-Published message to device.updated
+2026-01-29 22:24:26,423-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 200 OK"
+2026-01-29 22:24:26,428-INFO-Device updated: Laptop_User1
+2026-01-29 22:24:26,429-INFO-Published message to device.updated
+2026-01-29 22:24:56,734-INFO-Cache MISS for devices:all
+2026-01-29 22:24:56,744-INFO-Cache SET for devices:all (TTL: 60s)
+2026-01-29 22:24:56,753-INFO-Cache HIT for devices:all
+2026-01-29 22:30:40,407-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 200 OK"
+2026-01-29 22:30:40,409-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 200 OK"
+2026-01-29 22:30:40,570-INFO-Cache MISS for devices:all
+2026-01-29 22:30:40,571-INFO-Connected to Redis at redis:6379
+2026-01-29 22:30:40,573-INFO-Cache MISS for devices:all
+2026-01-29 22:30:40,581-INFO-Cache SET for devices:all (TTL: 60s)
+2026-01-29 22:30:40,582-INFO-Cache SET for devices:all (TTL: 60s)
+2026-01-29 22:30:49,610-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 200 OK"
+2026-01-29 22:30:49,651-INFO-Device updated: SmartScreen_01
+2026-01-29 22:30:49,661-INFO-Pika version 1.3.2 connecting to ('172.18.0.7', 5672)
+2026-01-29 22:30:49,663-INFO-Socket connected: <socket.socket fd=22, family=2, type=1, proto=6, laddr=('172.18.0.9', 54182), raddr=('172.18.0.7', 5672)>
+2026-01-29 22:30:49,668-INFO-Streaming transport linked up: (<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x7e42e0262cf0>, _StreamingProtocolShim: <SelectConnection PROTOCOL transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x7e42e0262cf0> params=<ConnectionParameters host=rabbitmq port=5672 virtual_host=/ ssl=False>>).
+2026-01-29 22:30:49,675-INFO-AMQPConnector - reporting success: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x7e42e0262cf0> params=<ConnectionParameters host=rabbitmq port=5672 virtual_host=/ ssl=False>>
+2026-01-29 22:30:49,676-INFO-AMQPConnectionWorkflow - reporting success: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x7e42e0262cf0> params=<ConnectionParameters host=rabbitmq port=5672 virtual_host=/ ssl=False>>
+2026-01-29 22:30:49,677-INFO-Connection workflow succeeded: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x7e42e0262cf0> params=<ConnectionParameters host=rabbitmq port=5672 virtual_host=/ ssl=False>>
+2026-01-29 22:30:49,679-INFO-Created channel=1
+2026-01-29 22:30:49,683-INFO-Connected to RabbitMQ
+2026-01-29 22:30:49,684-INFO-Published message to device.updated
+2026-01-29 22:30:49,687-INFO-Cache DELETED for pattern devices:all (1 keys)
+2026-01-29 22:30:50,606-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 200 OK"
+2026-01-29 22:30:50,613-INFO-Device updated: Laptop_User1
+2026-01-29 22:30:50,614-INFO-Published message to device.updated
+2026-01-29 22:30:56,709-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 200 OK"
+2026-01-29 22:30:56,714-INFO-Device updated: SmartScreen_01
+2026-01-29 22:30:56,715-INFO-Published message to device.updated
+2026-01-29 22:31:03,810-INFO-Cache MISS for devices:all
+2026-01-29 22:31:03,814-INFO-Cache SET for devices:all (TTL: 60s)
+2026-01-29 22:31:03,819-INFO-Cache HIT for devices:all
+2026-01-29 22:31:24,109-INFO-Cache HIT for devices:all
+2026-01-29 22:31:24,117-INFO-Cache HIT for devices:all
+2026-01-29 22:31:33,009-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 200 OK"
+2026-01-29 22:31:33,025-INFO-Device deleted: 5
+2026-01-29 22:31:33,037-INFO-Published message to device.deleted
+2026-01-29 22:31:33,038-INFO-Cache DELETED for pattern devices:all (1 keys)
+2026-01-29 22:45:09,190-INFO-Cache MISS for devices:all
+2026-01-29 22:45:09,569-INFO-Cache SET for devices:all (TTL: 60s)
+2026-01-29 22:45:09,628-INFO-Cache HIT for devices:all
+2026-01-29 22:45:35,679-INFO-Cache HIT for devices:all
+2026-01-29 22:45:47,729-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 200 OK"
+2026-01-29 22:45:47,955-INFO-Device created: Ecran
+2026-01-29 22:45:47,996-INFO-Published message to device.created
+2026-01-29 22:45:50,047-INFO-Cache MISS for devices:all
+2026-01-29 22:45:50,053-INFO-Cache SET for devices:all (TTL: 60s)
+2026-01-29 22:45:58,253-INFO-Cache HIT for devices:all
+2026-01-29 22:45:59,292-INFO-Cache HIT for devices:all
+2026-01-29 22:51:21,599-INFO-Cache MISS for devices:all
+2026-01-29 22:51:21,738-INFO-Cache SET for devices:all (TTL: 60s)
+2026-01-29 22:51:21,784-INFO-Cache HIT for devices:all
+2026-01-29 22:51:31,478-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 200 OK"
+2026-01-29 22:51:31,586-INFO-Device deleted: 6
+2026-01-29 22:51:31,607-INFO-Published message to device.deleted
+2026-01-29 22:51:31,615-INFO-Cache DELETED for pattern devices:all (1 keys)
+2026-01-29 22:51:43,841-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 200 OK"
+2026-01-29 22:51:43,880-INFO-Device created: Ecran
+2026-01-29 22:51:43,881-INFO-Published message to device.created
+2026-01-29 22:51:45,611-INFO-Cache MISS for devices:all
+2026-01-29 22:51:45,618-INFO-Cache SET for devices:all (TTL: 60s)
+2026-01-29 22:53:58,210-INFO-Cache MISS for devices:all
+2026-01-29 22:53:58,471-INFO-Cache SET for devices:all (TTL: 60s)
+2026-01-29 22:54:25,279-INFO-Cache MISS for devices:all
+2026-01-29 22:54:26,037-INFO-Cache SET for devices:all (TTL: 60s)
+2026-01-29 22:54:26,119-INFO-Cache HIT for devices:all
+2026-01-29 22:54:27,524-INFO-Cache HIT for devices:all
+2026-01-29 22:54:27,557-INFO-Cache HIT for devices:all
+2026-01-29 22:54:37,131-INFO-Cache MISS for devices:all
+2026-01-29 22:54:37,149-INFO-Cache SET for devices:all (TTL: 60s)
+2026-01-29 22:54:37,164-INFO-Cache HIT for devices:all
+2026-01-29 22:54:41,835-INFO-Cache MISS for devices:all
+2026-01-29 22:54:41,840-INFO-Cache SET for devices:all (TTL: 60s)
+2026-01-29 22:54:41,848-INFO-Cache HIT for devices:all
+2026-01-29 22:54:54,694-INFO-Cache MISS for devices:all
+2026-01-29 22:54:54,701-INFO-Cache SET for devices:all (TTL: 60s)
+2026-01-29 22:54:54,750-INFO-Cache HIT for devices:all
+2026-01-29 22:54:57,350-INFO-Cache MISS for devices:all
+2026-01-29 22:54:57,358-INFO-Cache SET for devices:all (TTL: 60s)
+2026-01-29 22:54:57,370-INFO-Cache HIT for devices:all
+2026-01-29 22:55:01,491-INFO-Cache MISS for devices:all
+2026-01-29 22:55:01,530-INFO-Cache SET for devices:all (TTL: 60s)
+2026-01-29 22:55:01,596-INFO-Cache HIT for devices:all
+2026-01-29 22:57:02,972-INFO-Cache MISS for devices:all
+2026-01-29 22:57:03,075-INFO-Cache SET for devices:all (TTL: 60s)
+2026-01-29 22:57:03,091-INFO-Cache HIT for devices:all
+2026-01-29 22:57:13,021-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 200 OK"
+2026-01-29 22:57:13,130-INFO-Device deleted: 7
+2026-01-29 22:57:13,160-INFO-Published message to device.deleted
+2026-01-29 22:57:28,608-INFO-HTTP Request: POST http://signing-ms:8003/users/verify-token "HTTP/1.1 200 OK"
+2026-01-29 22:57:28,645-INFO-Device created: Ecran
+2026-01-29 22:57:28,646-INFO-Published message to device.created
+2026-01-29 22:57:30,362-INFO-Cache MISS for devices:all
+2026-01-29 22:57:30,369-INFO-Cache SET for devices:all (TTL: 60s)
+2026-01-30 00:01:30,788-INFO-Cache MISS for devices:all
+2026-01-30 00:01:30,792-INFO-Cache SET for devices:all (TTL: 60s)
+2026-01-30 00:01:30,805-INFO-Cache HIT for devices:all
+2026-01-30 00:01:34,864-INFO-Cache HIT for devices:all
+2026-01-29 22:58:14,185-INFO-Cache HIT for devices:all
+2026-01-29 22:58:14,191-INFO-Cache HIT for devices:all
+2026-01-29 22:58:18,996-INFO-Cache HIT for devices:all
+2026-01-29 22:58:19,005-INFO-Cache HIT for devices:all

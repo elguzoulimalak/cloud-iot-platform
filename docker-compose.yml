@@ -74,6 +74,8 @@ services:
       - POSTGRES_PASSWORD=1234
       - SECRET_KEY=mysecretkey
       - JWT_ALGORITHM=HS256
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
     ports:
       - "8003:8003"
     networks:
