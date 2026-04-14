@@ -22,16 +22,6 @@ def decode_token(token:str):
         payload:dict=jwt.decode(token,SECRET_KEY,algorithms=['HS256'])
         if payload :return payload
     except JWTError as e :
-        print("Faild token decoding")
         return False
     
    
-if __name__ =='__main__':
-    hash=hash_pwd('1234')
-    print(hash)
-    print(verify_pwd(hash,'1234'))
-    token=create_token({"sub":'m.lahmer@esisa.ac.ma'})+'1'
-    print(decode_token(token))
-    
-
-    

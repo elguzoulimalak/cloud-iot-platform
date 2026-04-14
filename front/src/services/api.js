@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8001/devices';
+const API_URL = 'http://localhost:8080/devices';
 
 // Create axios instance with interceptor
 const api = axios.create({
@@ -13,6 +13,16 @@ api.interceptors.request.use(config => {
         config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
+});
+
+// Add 401 Interceptor to auto-logout
+api.interceptors.response.use(response => response, error => {
+    if (error.response && error.response.status === 401) {
+        console.warn("Session expired or invalid. Logging out...");
+        localStorage.removeItem('token');
+        window.location.href = '/'; // Redirect to Login
+    }
+    return Promise.reject(error);
 });
 
 export const getDevices = async () => {
@@ -40,6 +50,16 @@ export const deleteDevice = async (id) => {
         await api.delete(`/${id}`);
     } catch (error) {
         console.error("Error deleting device:", error);
+        throw error;
+    }
+};
+
+export const updateDevice = async (id, device) => {
+    try {
+        const response = await api.put(`/${id}`, device);
+        return response.data;
+    } catch (error) {
+        console.error("Error updating device:", error);
         throw error;
     }
 };

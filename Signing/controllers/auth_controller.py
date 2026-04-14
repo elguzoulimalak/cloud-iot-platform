@@ -3,12 +3,13 @@ from fastapi import APIRouter,Depends,HTTPException,Security,Request,Response
 from fastapi.security import HTTPBearer,HTTPAuthorizationCredentials
 
 from helpers.config import session_factory
-from dal.user_dao import get_all_users,create_user,authenticate
+from dal.user_dao import get_all_users,create_user,authenticate,get_user_by_email
 from dto.users_dto import UserResponse,UserRequest,TokenResponse,TokenRequest
 from entities.user import User
 from helpers.utils import create_token,decode_token
 from helpers.config import logger
 from dal.black_listed_dao import add_token_to_blacklist,is_blacklist_token
+from helpers.security import get_password_hash, verify_password
 router=APIRouter(prefix="/users",tags=["users"])  
 http_bearer=HTTPBearer()
 
@@ -42,7 +43,7 @@ def get_all(session=Depends(session_factory),
 def register_user(userRequest:UserRequest,session=Depends(session_factory)):
     user_entity=User(
         email=userRequest.email,
-        password=userRequest.password
+        password=get_password_hash(userRequest.password)
     )
     add_ok=create_user(session,user_entity)
     if add_ok :
@@ -61,12 +62,11 @@ def register_user(userRequest:UserRequest,session=Depends(session_factory)):
 def authenticate_user(userRequest:UserRequest,
                         session=Depends(session_factory),
                         ):
-    user_entity=User(
-        email=userRequest.email,
-        password=userRequest.password
-    )
-    auth_user=authenticate(session,user_entity)
-    if auth_user != False :
+    # 1. Get user by email (don't create User entity just for query)
+    auth_user = get_user_by_email(session, userRequest.email)
+    
+    # 2. Verify password
+    if auth_user and verify_password(userRequest.password, auth_user.password):
         claims:dict={
                 "sub":auth_user.email,
                 "role":auth_user.is_admin

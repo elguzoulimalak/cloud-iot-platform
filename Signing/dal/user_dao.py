@@ -14,6 +14,7 @@ def create_user(session:Session,user:User):
         session.refresh(user)
         return True
     except Exception as e:
+        print(f"DATABASE ERROR: {e}")
         session.rollback()   
         return False
 def get_all_users(session:Session):
@@ -26,3 +27,6 @@ def authenticate(session:Session,user:User):
     if filtred_user:
         return filtred_user
     return False
+
+def get_user_by_email(session: Session, email: str):
+    return session.query(User).filter(User.email == email).one_or_none()

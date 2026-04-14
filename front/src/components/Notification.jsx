@@ -13,17 +13,14 @@ export default function Notification() {
         });
 
         newSocket.on('connect', () => {
-            console.log('Connected to Monitoring Service');
             setIsConnected(true);
         });
 
         newSocket.on('disconnect', () => {
-            console.log('Disconnected from Monitoring Service');
             setIsConnected(false);
         });
 
         newSocket.on('device_event', (data) => {
-            console.log('Event received:', data);
             addNotification(data);
         });
 
@@ -31,9 +28,30 @@ export default function Notification() {
     }, []);
 
     const addNotification = (data) => {
+        // FILTER: Only alert if critical
+        const temp = data.sensor_readings?.temperature;
+        const isHot = temp && temp > 50;
+        const isError = data.status === 'ERROR' || data.status === 'OFFLINE';
+
+        if (!isHot && !isError) {
+            return; // Ignore normal heartbeat messages
+        }
+
         const id = Date.now();
-        const message = `Device ${data.name || data.id} : ${data.status || 'Updated'}`;
-        setNotifications(prev => [...prev, { id, message, type: 'info' }]);
+        const deviceName = data.device_id || 'Unknown Device';
+
+        let message = '';
+        let color = '#333';
+
+        if (isHot) {
+            message = `🔥 High Temp: ${temp}°C on ${deviceName}`;
+            color = '#7f1d1d'; // Dark Red
+        } else if (isError) {
+            message = `⚠️ Status Alert: ${deviceName} is ${data.status}`;
+            color = '#7c2d12'; // Dark Orange
+        }
+
+        setNotifications(prev => [...prev, { id, message, color }]);
 
         // Auto remove after 5 seconds
         setTimeout(() => {
@@ -66,7 +84,7 @@ export default function Notification() {
             {notifications.map(n => (
                 <div key={n.id} style={{
                     padding: '15px',
-                    backgroundColor: '#333',
+                    backgroundColor: n.color || '#333',
                     color: '#fff',
                     borderRadius: '5px',
                     boxShadow: '0 2px 5px rgba(0,0,0,0.2)',

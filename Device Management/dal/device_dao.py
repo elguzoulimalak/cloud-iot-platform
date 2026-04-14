@@ -9,8 +9,8 @@ def get_all_devices(session: Session):
 def get_device_by_id(session: Session, device_id: int):
     return session.query(Device).filter(Device.id == device_id).one_or_none()
 
-def get_device_by_name(session: Session, name: str):
-    return session.query(Device).filter(Device.name == name).one_or_none()
+def get_device_by_name_and_owner(session: Session, name: str, owner_email: str):
+    return session.query(Device).filter(Device.name == name, Device.owner_email == owner_email).one_or_none()
 
 def create_device(session: Session, device: Device):
     session.add(device)

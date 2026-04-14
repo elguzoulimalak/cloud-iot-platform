@@ -13,8 +13,6 @@ SIGNING_SERVICE_URL = os.getenv("SIGNING_SERVICE_URL", "http://signing-ms:8003")
 def verify_token(credentials: HTTPAuthorizationCredentials = Security(security)):
     token = credentials.credentials
     try:
-        # Synchronous HTTP call to Signing Service
-        # We use httpx.Client as context manager or just httpx.post for simplicity
         response = httpx.post(
             f"{SIGNING_SERVICE_URL}/users/verify-token",
             json={"token": token}

@@ -24,8 +24,30 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Create tables
-Base.metadata.create_all(bind=engine)
+# Database Connection Retry Logic
+import time
+from sqlalchemy.exc import OperationalError
+
+MAX_RETRIES = 10
+RETRY_DELAY = 3
+
+for attempt in range(MAX_RETRIES):
+    try:
+        # Create tables
+        Base.metadata.create_all(bind=engine)
+        print("Database connected and tables created successfully.")
+        break
+    except OperationalError as e:
+        print(f"Database connection failed (Attempt {attempt + 1}/{MAX_RETRIES}): {e}")
+        if attempt < MAX_RETRIES - 1:
+            time.sleep(RETRY_DELAY)
+        else:
+            print("Max retries reached. Exiting.")
+            raise e
+
+@app.get("/health")
+def health_check():
+    return {"status": "healthy", "service": "device-management"}
 
 app.include_router(router)
 

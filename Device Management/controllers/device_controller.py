@@ -13,26 +13,36 @@ from helpers.auth_middleware import verify_token
 router = APIRouter(prefix="/devices", tags=["devices"])
 
 @router.get("/", response_model=list[DeviceResponse])
-def get_all(session: Session = Depends(session_factory)):
-    # Try cache first
-    cached_devices = redis_client.get_cache("devices:all")
+def get_all(session: Session = Depends(session_factory), user_payload = Depends(verify_token)):
+    # Extract User Email
+    user_email = user_payload.get('sub')
+    
+    # Try cache first (User specific cache key)
+    cached_devices = redis_client.get_cache(f"devices:{user_email}")
     if cached_devices:
         return cached_devices
 
-    devices = device_dao.get_all_devices(session)
+    # Filter by Owner Email
+    devices = session.query(Device).filter(Device.owner_email == user_email).all()
     
-    # Set cache
-    # Convert Pydantic models to dicts for JSON serialization if needed, 
-    # but here 'devices' is a list of ORM objects. 
-    # FastApi handles ORM -> JSON, but we need JSON for Redis.
-    # We need to serialize carefully.
+    # Cache
     devices_json = [DeviceResponse.model_validate(d).model_dump() for d in devices]
-    redis_client.set_cache("devices:all", devices_json, ttl=60)
+    redis_client.set_cache(f"devices:{user_email}", devices_json, ttl=60)
     
     return devices
 
+@router.get("/system/all", response_model=list[DeviceResponse])
+def get_all_system(session: Session = Depends(session_factory)):
+    """
+    Internal Endpoint for Simulation Runner (No Auth or API Key for simplicity in MVP)
+    """
+    devices = device_dao.get_all_devices(session)
+    return devices
+
 @router.get("/{device_id}", response_model=DeviceResponse)
-def get_one(device_id: int, session: Session = Depends(session_factory)):
+def get_one(device_id: int, session: Session = Depends(session_factory), user_payload = Depends(verify_token)):
+    # ... existing logic but maybe check ownership? For MVP, just get logic is fine if they know ID.
+    # ...
     # Try cache
     cached_device = redis_client.get_cache(f"device:{device_id}")
     if cached_device:
@@ -42,6 +52,11 @@ def get_one(device_id: int, session: Session = Depends(session_factory)):
     if not device:
         raise HTTPException(status_code=404, detail="Device not found")
         
+    # Check Ownership
+    user_email = user_payload.get('sub')
+    if device.owner_email and device.owner_email != user_email:
+         raise HTTPException(status_code=403, detail="Not authorized to access this device")
+
     # Set Cache
     device_json = DeviceResponse.model_validate(device).model_dump()
     redis_client.set_cache(f"device:{device_id}", device_json, ttl=300)
@@ -50,8 +65,10 @@ def get_one(device_id: int, session: Session = Depends(session_factory)):
 
 @router.post("/", response_model=DeviceResponse, status_code=status.HTTP_201_CREATED)
 def create(device_request: DeviceRequest, session: Session = Depends(session_factory), user_payload = Depends(verify_token)):
-    # Check if exists
-    existing = device_dao.get_device_by_name(session, device_request.name)
+    user_email = user_payload.get('sub')
+    
+    # Check if exists (Scoped to User)
+    existing = device_dao.get_device_by_name_and_owner(session, device_request.name, user_email)
     if existing:
         raise HTTPException(status_code=400, detail="Device with this name already exists")
     
@@ -59,7 +76,8 @@ def create(device_request: DeviceRequest, session: Session = Depends(session_fac
         name=device_request.name,
         type=device_request.type,
         status=device_request.status,
-        ip_address=device_request.ip_address
+        ip_address=device_request.ip_address,
+        owner_email=user_email
     )
     
     try:
@@ -75,9 +93,9 @@ def create(device_request: DeviceRequest, session: Session = Depends(session_fac
             "ip_address": created_device.ip_address
         }
         publisher.publish(routing_key="device.created", message=event_data)
-        
+    
         # Invalidate Cache
-        redis_client.delete_cache("devices:all")
+        redis_client.delete_cache(f"devices:{user_email}")
         
         return created_device
     except Exception as e:
@@ -104,7 +122,9 @@ def update(device_id: int, device_request: DeviceRequest, session: Session = Dep
         publisher.publish(routing_key="device.updated", message=event_data)
         
         # Invalidate Cache
-        redis_client.delete_cache("devices:all")
+        # Invalidate Cache (Need user email)
+        user_email = user_payload.get('sub')
+        redis_client.delete_cache(f"devices:{user_email}")
         redis_client.delete_cache(f"device:{device_id}")
         
         return updated_device
@@ -135,7 +155,9 @@ def delete(device_id: int, session: Session = Depends(session_factory), user_pay
         publisher.publish(routing_key="device.deleted", message=event_data)
         
         # Invalidate Cache
-        redis_client.delete_cache("devices:all")
+        # Invalidate Cache (Need user email)
+        user_email = user_payload.get('sub')
+        redis_client.delete_cache(f"devices:{user_email}")
         redis_client.delete_cache(f"device:{device_id}")
         
         return

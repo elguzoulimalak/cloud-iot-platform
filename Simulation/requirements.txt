@@ -1,2 +1,4 @@
-requests
-pika
+paho-mqtt==2.1.0
+psutil==6.1.1
+python-dotenv==1.0.1
+requests==2.31.0

@@ -15,6 +15,7 @@ services:
     ports:
       - "8001:8001"
     volumes:
+      - ./Device Management:/app
       - ./Device Management/logs:/app/logs
     networks:
       - net-iot
@@ -41,6 +42,8 @@ services:
       context: ./Monitoring
       dockerfile: Dockerfile
     container_name: monitoring-ms
+    volumes:
+      - ./Monitoring:/app
     environment:
       - MONGO_URI=mongodb://mongo:27017
       - MONGO_DB_NAME=iot_monitoring
@@ -67,6 +70,8 @@ services:
       context: ./Signing
       dockerfile: Dockerfile
     container_name: signing-ms
+    volumes:
+      - ./Signing:/app
     environment:
       - SERVER_DB=signing_db
       - NAME_DB=db_signing
@@ -97,11 +102,12 @@ services:
 
   # --- Shared Infrastructure ---
   rabbitmq:
-    image: rabbitmq:3-management-alpine
+    build: ./rabbitmq
     container_name: rabbitmq
     ports:
       - "5672:5672"
       - "15672:15672"
+      - "1883:1883"
     networks:
       - net-iot
 
@@ -112,6 +118,55 @@ services:
       - "6379:6379"
     networks:
       - net-iot
+
+
+
+  # --- API Gateway ---
+  gateway:
+    image: nginx:latest
+    container_name: api_gateway
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "8080:80"
+    networks:
+      - net-iot
+    depends_on:
+      - device_mgmt
+      - signing
+      - monitoring
+
+  # --- MQTT Bridge ---
+  bridge:
+    build:
+      context: .
+      dockerfile: Dockerfile.bridge
+    container_name: mqtt_bridge
+    networks:
+      - net-iot
+    environment:
+      - BROKER_HOST=rabbitmq
+      - BROKER_PORT=1883
+      - API_URL=http://monitoring:8002/ingest
+    depends_on:
+      - rabbitmq
+      - monitoring
+
+  # --- Device Simulation ---
+  simulation:
+    build: ./Simulation
+    container_name: iot_simulation
+    networks:
+      - net-iot
+    environment:
+      - BROKER_HOST=rabbitmq
+      - BROKER_PORT=1883
+      # Note: auto_runner uses /system/all to fetch devices
+      # Since it runs inside docker network, it can access gateway via service name 'gateway' or 'api_gateway'
+      - DEVICE_MGMT_URL=http://gateway:80/devices
+    depends_on:
+      - rabbitmq
+      - gateway
 
 networks:
   net-iot:

@@ -1,9 +1,7 @@
-/__pycache__
-/logs
-/test
-/.venv
-._DS_Store
-.gitignore
-.env
-/node-module
-/.vscode
+venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
