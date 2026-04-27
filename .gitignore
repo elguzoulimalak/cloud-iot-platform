@@ -18,3 +18,7 @@ build/
 # OS
 .DS_Store
 Thumbs.db
+
+# Virtual Environments
+venv/
+.venv/
